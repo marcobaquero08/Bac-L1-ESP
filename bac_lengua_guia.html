@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAC Lengua Española — Guía Completa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* NOCHE (por defecto) */
+:root{
+  --bg:#111827;--s1:#1f2937;--s2:#1f2937;--s3:#374151;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.16);
+  --accent:#60a5fa;--accent2:#93c5fd;
+  --tx:#f9fafb;--tx2:#9ca3af;--tx3:#6b7280;
+  --r:10px;--sw:260px;
+  --hdr-bg:rgba(17,24,39,.97);
+  --mark-bg:rgba(96,165,250,.2);
+}
+
+/* DÍA */
+html.day{
+  --bg:#f9fafb;--s1:#ffffff;--s2:#ffffff;--s3:#f3f4f6;
+  --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.16);
+  --accent:#1d4ed8;--accent2:#1e40af;
+  --tx:#111827;--tx2:#6b7280;--tx3:#9ca3af;
+  --hdr-bg:rgba(255,255,255,.97);
+  --mark-bg:rgba(29,78,216,.12);
+}
+
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--bg);color:var(--tx);
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px;line-height:1.8;
+  transition:background .3s,color .3s;
+}
+
+/* HEADER */
+#hdr{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
+  background:var(--hdr-bg);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;gap:14px;padding:0 20px;
+  transition:background .3s,border-color .3s;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-icon{font-size:20px}
+.brand-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--accent);white-space:nowrap}
+.brand-sub{font-size:10.5px;color:var(--tx3);white-space:nowrap;letter-spacing:.2px}
+
+/* BÚSQUEDA */
+#sw{flex:1;max-width:360px;position:relative}
+#sw input{
+  width:100%;background:var(--s3);border:1px solid var(--border2);
+  border-radius:24px;padding:7px 32px 7px 36px;color:var(--tx);
+  font-family:'Source Serif 4',serif;font-size:13.5px;outline:none;
+  transition:border-color .15s,box-shadow .15s,background .3s;
+}
+#sw input::placeholder{color:var(--tx3)}
+#sw input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--mark-bg)}
+#sw::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none}
+#sc{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tx3);cursor:pointer;font-size:13px;display:none;padding:2px 5px;border-radius:4px}
+#sc:hover{color:var(--tx)}
+#fc{font-size:11.5px;color:var(--accent);white-space:nowrap;flex-shrink:0;font-weight:600}
+
+/* BOTÓN TEMA */
+#theme-btn{
+  display:flex;align-items:center;gap:6px;
+  background:var(--s3);border:1px solid var(--border2);
+  border-radius:20px;padding:6px 14px;cursor:pointer;
+  font-size:12px;font-family:'Source Serif 4',serif;
+  font-weight:600;color:var(--tx2);
+  white-space:nowrap;flex-shrink:0;
+  transition:border-color .15s,color .15s,background .3s;
+}
+#theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tb-icon{font-size:14px;line-height:1}
+.tb-label{font-size:12px}
+
+#mb{background:none;border:none;color:var(--tx2);font-size:20px;cursor:pointer;display:none;padding:4px 6px;flex-shrink:0}
+
+/* LAYOUT */
+#layout{display:flex;margin-top:56px;height:calc(100vh - 56px);overflow:hidden}
+
+/* SIDEBAR */
+#sidebar{
+  width:var(--sw);flex-shrink:0;
+  background:var(--s1);border-right:1px solid var(--border);
+  height:100%;overflow-y:auto;overflow-x:hidden;
+  padding:14px 0 40px;
+  transition:background .3s,border-color .3s;
+}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+.ng{margin-bottom:1px}
+.ng-hdr{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 16px;cursor:pointer;
+  font-size:12.5px;font-weight:600;color:var(--tx2);
+  border-left:3px solid transparent;
+  transition:all .15s;user-select:none;
+}
+.ng-hdr:hover{background:var(--s3);color:var(--tx)}
+.ng-hdr.active-sec{color:var(--accent);border-left-color:var(--accent);background:var(--s3)}
+.ng-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ng-arr{margin-left:auto;font-size:10px;transition:transform .2s;color:var(--tx3)}
+.ng-hdr.open .ng-arr{transform:rotate(90deg)}
+
+.ns{display:none;padding:2px 0}
+.ns.open{display:block}
+
+.ni{
+  display:block;padding:5px 16px 5px 32px;
+  font-size:12px;color:var(--tx3);cursor:pointer;
+  border-left:3px solid transparent;
+  transition:all .13s;line-height:1.5;
+}
+.ni:hover{color:var(--tx);background:var(--s3)}
+.ni.active{color:var(--accent);border-left-color:var(--accent);background:var(--s3)}
+.ni.sub{padding-left:46px;font-size:11.5px}
+
+/* CONTENIDO */
+#content{
+  flex:1;min-width:0;height:100%;
+  overflow-y:auto;
+  padding:32px 44px 80px;
+}
+#content::-webkit-scrollbar{width:6px}
+#content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ENCABEZADOS DE SECCIÓN */
+.sh{
+  display:flex;align-items:center;gap:13px;
+  margin:48px 0 20px;padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+  scroll-margin-top:72px;max-width:1100px;
+  transition:border-color .3s;
+}
+.sh:first-child{margin-top:4px}
+.sh-bar{width:3px;height:26px;border-radius:2px;flex-shrink:0}
+.sh h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--tx);letter-spacing:-.2px}
+.sh-icon{font-size:22px}
+
+/* TARJETAS */
+.card{
+  background:var(--s2);border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:10px;overflow:hidden;
+  transition:border-color .15s,background .3s;
+  max-width:1100px;
+}
+.card:hover{border-color:var(--border2)}
+.ch{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px;cursor:pointer;
+  user-select:none;transition:background .13s;
+}
+.ch:hover{background:var(--s3)}
+.ch-title{font-size:14px;font-weight:600;color:var(--tx);flex:1;line-height:1.45}
+.ch-title em{font-style:italic;color:var(--accent)}
+.ch-arr{color:var(--tx3);font-size:12px;transition:transform .2s;flex-shrink:0}
+.card.open .ch-arr{transform:rotate(180deg)}
+
+.cb{
+  display:none;padding:18px 20px;
+  border-top:1px solid var(--border);
+  font-size:14.5px;color:var(--tx);line-height:1.85;
+}
+.card.open .cb{display:block}
+
+/* TIPOGRAFÍA EN TARJETAS */
+.cb h4{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.9px;margin:18px 0 9px}
+.cb h4:first-child{margin-top:0}
+.cb p{margin-bottom:10px}
+.cb p:last-child{margin-bottom:0}
+.cb ul{margin:7px 0 12px 22px}
+.cb li{margin-bottom:6px}
+.cb strong{color:var(--tx);font-weight:600}
+.cb em{color:var(--tx2);font-style:italic}
+.cb b{color:var(--tx);font-weight:600}
+
+/* DOS COLUMNAS */
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.tc-box{background:var(--s3);border-radius:8px;padding:14px;border:1px solid var(--border);transition:background .3s}
+.tc-box h5{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.7px;margin-bottom:9px}
+
+/* ETAPAS */
+.etapas{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.etapa{background:var(--s3);border-radius:8px;padding:13px 16px;border-left:3px solid var(--accent);transition:background .3s}
+.etapa-n{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px}
+.etapa-titulo{font-size:13.5px;font-weight:600;color:var(--tx);font-style:italic;margin-bottom:7px}
+.etapa p{font-size:13.5px;color:var(--tx2);line-height:1.7;margin:0}
+
+/* BADGES — NOCHE */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+.b40{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.b50{background:rgba(96,165,250,.15);color:#93c5fd;border:1px solid rgba(96,165,250,.3)}
+.b60{background:rgba(52,211,153,.15);color:#6ee7b7;border:1px solid rgba(52,211,153,.3)}
+.b70{background:rgba(192,132,252,.15);color:#c084fc;border:1px solid rgba(192,132,252,.3)}
+.b80{background:rgba(251,191,36,.15);color:#fde68a;border:1px solid rgba(251,191,36,.3)}
+.b90{background:rgba(156,163,175,.15);color:#d1d5db;border:1px solid rgba(156,163,175,.3)}
+.bLat{background:rgba(45,212,191,.15);color:#5eead4;border:1px solid rgba(45,212,191,.3)}
+.bObra{background:rgba(96,165,250,.15);color:var(--accent);border:1px solid rgba(96,165,250,.3)}
+.bPoeta{background:rgba(192,132,252,.15);color:#c084fc;border:1px solid rgba(192,132,252,.3)}
+.bTeatro{background:rgba(45,212,191,.15);color:#5eead4;border:1px solid rgba(45,212,191,.3)}
+/* BADGES — DÍA */
+html.day .b40{background:#fef2f2;color:#dc2626;border-color:#fca5a5}
+html.day .b50{background:#eff6ff;color:#2563eb;border-color:#93c5fd}
+html.day .b60{background:#ecfdf5;color:#059669;border-color:#6ee7b7}
+html.day .b70{background:#faf5ff;color:#7c3aed;border-color:#c4b5fd}
+html.day .b80{background:#fffbeb;color:#b45309;border-color:#fcd34d}
+html.day .b90{background:#f9fafb;color:#6b7280;border-color:#d1d5db}
+html.day .bLat{background:#f0fdfa;color:#0f766e;border-color:#5eead4}
+html.day .bObra{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}
+html.day .bPoeta{background:#faf5ff;color:#7c3aed;border-color:#c4b5fd}
+html.day .bTeatro{background:#f0fdfa;color:#0f766e;border-color:#5eead4}
+
+/* RESALTADO */
+mark{background:var(--mark-bg);color:var(--tx);border-radius:3px;padding:1px 3px}
+.hidden{display:none!important}
+
+/* SIN RESULTADOS */
+#nr{display:none;text-align:center;padding:70px;color:var(--tx3)}
+#nr p{font-size:16px;margin-bottom:6px}
+#nr small{font-size:13px}
+
+/* BOTÓN ARRIBA */
+#btt{
+  position:fixed;bottom:24px;right:24px;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:16px;font-weight:700;display:none;
+  align-items:center;justify-content:center;
+  z-index:150;box-shadow:0 4px 14px rgba(0,0,0,.3);
+  transition:transform .15s,background .3s;
+}
+#btt:hover{transform:translateY(-2px)}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  #sidebar{
+    position:fixed;top:56px;bottom:0;left:0;z-index:150;
+    transform:translateX(-100%);transition:transform .25s;
+    box-shadow:4px 0 24px rgba(0,0,0,.25);
+  }
+  #sidebar.open{transform:none}
+  #content{padding:16px 16px 60px}
+  #mb{display:block}
+  #sw{max-width:none;flex:1}
+  .tc{grid-template-columns:1fr}
+  .brand-sub{display:none}
+  .tb-label{display:none}
+}
+</style>
+
+<div id="app">
+  <header id="hdr">
+    <div class="brand">
+      <span class="brand-icon">📚</span>
+      <div>
+        <div class="brand-name">BAC Lengua Española</div>
+        <div class="brand-sub">Guía de Repaso Completa</div>
+      </div>
+    </div>
+    <div id="sw">
+      <input id="search" type="text" placeholder="Buscar en toda la guía…" oninput="doSearch(this.value)">
+      <button id="sc" onclick="clearSearch()">✕</button>
+    </div>
+    <span id="fc"></span>
+    <button id="theme-btn" onclick="toggleTheme()" title="Cambiar tema">
+      <span class="tb-icon" id="theme-icon">☀️</span>
+      <span class="tb-label" id="theme-label">Día</span>
+    </button>
+    <button id="mb" onclick="toggleSidebar()">☰</button>
+  </header>
+
+  <div id="layout">
+    <nav id="sidebar"></nav>
+    <main id="content"></main>
+  </div>
+</div>
+<button id="btt" onclick="goTop()">↑</button>
+
+<script>
+// ── NAV TREE ──────────────────────────────────────────
+const NAV = [
+  {id:'analisis',label:'1. Análisis Textual',icon:'📝',color:'#3b82f6',items:[
+    {id:'anal-1',label:'1.1 Comentario lingüístico'},
+    {id:'anal-2',label:'1.2 Estructura del comentario'},
+  ]},
+  {id:'narrativa',label:'2. Narrativa',icon:'📖',color:'#f59e0b',items:[
+    {id:'n-40',label:'Años 40: Novela existencial'},
+    {id:'n-nada',label:'↳ Nada — Laforet',sub:true},
+    {id:'n-camino',label:'↳ El Camino — Delibes',sub:true},
+    {id:'n-50',label:'Años 50: Novela social'},
+    {id:'n-colmena',label:'↳ La Colmena — Cela',sub:true},
+    {id:'n-visillos',label:'↳ Entre Visillos — Martín Gaite',sub:true},
+    {id:'n-60',label:'Años 60: Novela experimental'},
+    {id:'n-silencio',label:'↳ Tiempo de silencio — Martín Santos',sub:true},
+    {id:'n-mario',label:'↳ Cinco horas con Mario — Delibes',sub:true},
+    {id:'n-70',label:'Años 70+: Aventura e intriga'},
+    {id:'n-80psi',label:'Años 80+: Análisis psicológico'},
+    {id:'n-80mem',label:'Años 80+: Memoria histórica'},
+    {id:'n-auto',label:'Años 80-90+: Autoficción'},
+    {id:'n-trans',label:'Años 90+: Transición y democracia'},
+    {id:'n-lat',label:'Latinoamérica: Realismo mágico'},
+    {id:'n-cronica',label:'↳ Crónica — García Márquez',sub:true},
+    {id:'n-casa',label:'↳ La casa de los espíritus — Allende',sub:true},
+  ]},
+  {id:'poesia',label:'3. Poesía',icon:'🎭',color:'#a855f7',items:[
+    {id:'p-4050',label:'Años 40-50: Arraigada / Desarraigada / Social'},
+    {id:'p-otero',label:'↳ Blas de Otero',sub:true},
+    {id:'p-60',label:'Años 60: Generación del 50-60'},
+    {id:'p-gil',label:'↳ Jaime Gil de Biedma',sub:true},
+    {id:'p-70nov',label:'Años 70: Los Novísimos'},
+    {id:'p-gim',label:'↳ Pere Gimferrer',sub:true},
+    {id:'p-70conf',label:'Años 70: Poesía confesional'},
+    {id:'p-80exp',label:'Años 80-90: Poéticas de la experiencia'},
+    {id:'p-otras',label:'Otras tendencias (metafísica, épica…)'},
+    {id:'p-lat',label:'Poesía latinoamericana (tendencias)'},
+    {id:'p-neruda',label:'↳ Pablo Neruda',sub:true},
+    {id:'p-vallejo',label:'↳ César Vallejo',sub:true},
+  ]},
+  {id:'teatro',label:'4. Teatro',icon:'🎪',color:'#14b8a6',items:[
+    {id:'t-40',label:'Años 40-50: Comedia burguesa y humor'},
+    {id:'t-somb',label:'↳ Tres sombreros de copa — Mihura',sub:true},
+    {id:'t-men',label:'↳ Las Meninas — Buero Vallejo',sub:true},
+    {id:'t-50soc',label:'Años 50-60: Teatro existencial y social'},
+    {id:'t-50aut',label:'↳ Autores: Buero Vallejo, Sastre',sub:true},
+    {id:'t-70exp',label:'Años 70: Teatro experimental'},
+    {id:'t-70aut',label:'↳ Autores: Arrabal, Nieva, Gala…',sub:true},
+    {id:'t-80',label:'Años 80: Nuevos realismos'},
+    {id:'t-80aut',label:'↳ Autores: Alonso de Santos, Sanchís…',sub:true},
+    {id:'t-90',label:'Años 90+: Últimas tendencias'},
+    {id:'t-90aut',label:'↳ Autores: Mayorga, Conejero',sub:true},
+  ]},
+  {id:'ensayo',label:'5. Ensayo',icon:'✍️',color:'#f43f5e',items:[
+    {id:'e-arg1',label:'Argumento 1: La sociedad condiciona'},
+    {id:'e-arg2',label:'Argumento 2: Libertad interior'},
+    {id:'e-arg3',label:'Argumento 3: Responsabilidad'},
+    {id:'e-concl',label:'Conclusión global'},
+  ]},
+];
+
+// ── CONTENT DATA ──────────────────────────────────────
+const CARDS = [
+  // ══════════════════════════════════════════════════
+  // 1. ANÁLISIS TEXTUAL
+  // ══════════════════════════════════════════════════
+  {id:'anal-1',sec:'analisis',title:'1.1 Comentario lingüístico de un artículo de opinión',badge:null,open:true,body:`
+<h4>El Texto</h4>
+<p>Se tratará de un <strong>artículo de opinión</strong> (modalidad textual <em>expositiva-argumentativa</em>), en el ámbito periodístico y divulgativo.</p>
+<h4>Tema y Tesis</h4>
+<p><strong>El tema</strong> es la idea central en torno a la cual gira un texto.</p>
+<p><strong>La tesis</strong> del autor es una crítica, defensa, reivindicación, reflexión o valoración sobre el tema. Tipos:</p>
+<ul>
+  <li><strong>Deductiva:</strong> tesis al principio seguida de argumentos que la desarrollan.</li>
+  <li><strong>Inductiva:</strong> los argumentos llevan a una tesis desvelada al final.</li>
+  <li><strong>Enmarcada:</strong> tesis repetida al principio y al final del texto.</li>
+</ul>
+<h4>Adecuación Textual</h4>
+<p>¿Es apropiado el estilo según el tema, el emisor y el receptor? Estilo informal/formal y divulgativo, distintos tipos de argumentos, rasgos de objetividad y subjetividad.</p>
+<h4>Coherencia</h4>
+<div class="tc">
+  <div class="tc-box"><h5>Pragmática</h5><p>Adecuación del texto con respecto a la situación, la finalidad y el género textual.</p></div>
+  <div class="tc-box"><h5>Interna</h5><p>Conexión coherente del tema y las ideas entre los enunciados de un texto.</p></div>
+</div>
+<h4>Cohesión Léxica</h4>
+<ul>
+  <li><strong>Repeticiones o familias léxicas</strong></li>
+  <li><strong>Campos referenciales</strong> — grupos de palabras del mismo contexto</li>
+  <li><strong>Sinónimos / Antónimos</strong> contextuales</li>
+  <li><strong>Hipónimos / Hiperónimos:</strong> ej. manzana / fruta</li>
+  <li><strong>Léxico valorativo</strong></li>
+</ul>
+<h4>Cohesión Gramatical</h4>
+<ul>
+  <li><strong>Marcadores y conectores:</strong> por tanto, sin embargo, además, porque, aunque…</li>
+  <li><strong>Pronombres anafóricos:</strong> hacen referencia a algo ya mencionado.</li>
+  <li><strong>Pronombres catafóricos:</strong> hacen referencia a algo que se mencionará a continuación.</li>
+  <li><strong>Elipsis:</strong> omisión de elementos ya conocidos del contexto.</li>
+  <li><strong>Determinantes posesivos:</strong> marcan opinión y subjetividad.</li>
+  <li><strong>Puntuación</strong></li>
+</ul>`},
+
+  {id:'anal-2',sec:'analisis',title:'1.2 Estructura del comentario lingüístico',badge:null,body:`
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Paso 1</div>
+    <div class="etapa-titulo">Presentación e identificación del tipo de texto</div>
+    <p>"El presente texto es un artículo de opinión publicado en X por Y…" → Identificar modalidad textual y ámbito de uso.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Paso 2</div>
+    <div class="etapa-titulo">Formulación de la tesis y argumentos</div>
+    <p>"El autor (critica, defiende…) → (tesis)…" → Identificar las ideas principales y su relación.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Paso 3</div>
+    <div class="etapa-titulo">Delimitación de la estructura</div>
+    <p>"La estructura se divide en X partes → (función de cada una y sus argumentos)…"</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Paso 4</div>
+    <div class="etapa-titulo">Comentario sobre las propiedades del texto</div>
+    <p>Tipo de texto (y finalidad), tono, emisor/receptor. Justificar: adecuación textual, coherencia global y mecanismos de cohesión léxica y gramatical.</p>
+  </div>
+</div>`},
+
+  // ══════════════════════════════════════════════════
+  // 2. NARRATIVA
+  // ══════════════════════════════════════════════════
+  {id:'n-40',sec:'narrativa',badge:'Años 40',badgeClass:'b40',title:'2.1 Años 40: La novela existencial',open:true,body:`
+<p>Tras la Guerra Civil (1936-39) España se encuentra destruida, empobrecida y bajo el régimen franquista. El país estaba completamente aislado económica y culturalmente, con escasez de alimentos y represión de cualquier oposición.</p>
+<p>Hubo una ruptura con la narrativa anterior (novela experimental/vanguardista de los años 20 y novela social de los 30), surgiendo un tipo de novela poco comprometida que en muchos casos celebraba la victoria de Franco.</p>
+<p>Sin embargo, ya en los primeros años cuarenta aparecen excepciones: en 1942 Cela publicó <em>La familia de Pascual Duarte</em> (tremendismo) y en 1945 Laforet publicó <em>Nada</em>.</p>
+<h4>Características</h4>
+<ul>
+  <li>Reflejan la realidad de la posguerra: hambre, miseria, pobreza, desesperanza e incertidumbre.</li>
+  <li>Esa visión se transmite a través de la visión personal de los personajes.</li>
+  <li>Personajes desorientados y tristes, en una realidad difícil de soportar.</li>
+  <li>Ambientes opresivos y angustiosos: visión pesimista de la vida (existencialismo).</li>
+  <li>Novelas muy trabajadas literariamente: primera persona narrativa, metáforas, enumeraciones, descripciones subjetivas…</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>La soledad, la inadaptación, las frustraciones personales, la angustia existencial.</li>
+  <li>La hipocresía social, el sentido de la vida, el temor a la muerte.</li>
+  <li>La vida en el medio rural: armonía con la naturaleza y, negativamente, condiciones duras, enfermedades, violencia.</li>
+</ul>`},
+
+  {id:'n-nada',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.1.1 Carmen Laforet — Nada (1945)',body:`
+<p><em>Nada</em> (1945) es una de las novelas más importantes de la narrativa española del siglo XX y ganadora del Premio Nadal. Narrada en primera persona por Andrea, joven estudiante que ingresa en la Universidad y va a vivir con unos familiares en Barcelona. Es un reflejo de la miseria material y moral de la posguerra.</p>
+<h4>Temas</h4>
+<ul>
+  <li>Búsqueda de la libertad y del deseo de libertad femenina.</li>
+  <li>Presión familiar y social, rechazo del matrimonio y del amor romántico.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p>Narrada en primera persona por Andrea como protagonista y <strong>testigo/observador</strong>. Transcurre en <strong>Barcelona entre 1939 y 1940</strong> con algunos flashbacks al pasado.</p>
+<h4>Estilo</h4>
+<p>Sencillo, natural y sobrio. <strong>Descripciones impresionistas</strong> de espacios y objetos, y <strong>expresionistas</strong> de los personajes (deformación de rasgos, animalización).</p>`},
+
+  {id:'n-camino',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.1.2 Miguel Delibes — El Camino (1950)',body:`
+<p>Novela que expone una profunda sensibilidad hacia la naturaleza. Sus protagonistas son unos niños que viven en armonía con el pueblo rural donde han nacido. Aborda también el amor, la amistad y la dureza de la vida en ese medio. <strong>Sitúa a la novela a caballo entre el realismo existencial de los 40 y el realismo social de los 50.</strong></p>
+<h4>Temas</h4>
+<ul>
+  <li>La infancia y el paso a la madurez; la amistad; la muerte.</li>
+  <li>La relación del ser humano con la naturaleza.</li>
+  <li>El conflicto entre el mundo rural tradicional y el progreso.</li>
+  <li>La educación, el destino impuesto por los adultos, la pérdida de la inocencia.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p>Narrador en <strong>tercera persona omnisciente</strong>, con focalización cercana al pensamiento del niño. La acción transcurre en un pueblo rural castellano en un tiempo impreciso de la posguerra. El <strong>presente narrativo es la noche anterior</strong> a la partida de Daniel; el resto son <strong>flashbacks</strong> de su infancia.</p>
+<h4>Estilo</h4>
+<p>Sencillo, natural y sobrio. Descripciones líricas de la naturaleza, léxico rural y popular, humor y ternura en el retrato de los personajes.</p>`},
+
+  {id:'n-50',sec:'narrativa',badge:'Años 50',badgeClass:'b50',title:'2.2 Años 50: La novela social',open:true,body:`
+<p>Durante los años 50, España comienza a salir del aislamiento internacional. Hay un primer despegue económico, primeras emigraciones del campo a la ciudad y surgimiento de barrios obreros. Jóvenes que no vivieron la guerra encabezan las primeras protestas contra el franquismo.</p>
+<h4>Características</h4>
+<ul>
+  <li>Radiografía de la sociedad española de la época: clases sociales y modos de vida.</li>
+  <li>En algunos casos, instrumento de denuncia de injusticias sociales y políticas.</li>
+  <li>Los personajes reflejan la sociedad (hábitos, relaciones) más que la psicología individual.</li>
+  <li>Estilo sencillo y accesible. Evita lenguaje rebuscado. <strong>Uso abundante del diálogo.</strong></li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>Dureza y miseria de la vida en el campo; explotación obrera en las fábricas.</li>
+  <li>La vida de las clases desfavorecidas; el chabolismo.</li>
+  <li>El ambiente monótono y conservador de las clases medias urbanas.</li>
+  <li>La discriminación de la mujer (reducida a los roles de hija, esposa o madre).</li>
+</ul>`},
+
+  {id:'n-colmena',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.2.1 Camilo José Cela — La Colmena (1951)',body:`
+<p>Situada en el <strong>invierno de 1943 en Madrid</strong>, rompe con la novela tradicional por su estructura fragmentaria y su gran número de personajes (más de 250). <strong>Novela coral</strong> con Martín Marco como hilo conductor. Organizada en seis capítulos y un final, en breves secuencias de estilo casi cinematográfico.</p>
+<h4>Temas</h4>
+<ul>
+  <li>La miseria material y moral de la posguerra; la soledad y la frustración.</li>
+  <li>La represión social y sexual; la hipocresía.</li>
+  <li>La lucha cotidiana por la supervivencia; la incertidumbre del destino humano.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p><strong>Tercera persona omnisciente</strong> con perspectiva objetiva y fragmentaria, alternando el foco entre numerosos personajes. La acción abarca <strong>unos pocos días del invierno de 1942</strong>, con orden cronológico <strong>no lineal</strong>.</p>
+<h4>Novela Coral</h4>
+<p>No existe protagonista único. El conjunto coral de personajes representa distintos estratos sociales. Madrid aparece como una metáfora de la colmena: individuos que se cruzan constantemente.</p>
+<h4>Estilo</h4>
+<p>Sencillo y aparentemente objetivo. Lenguaje directo y coloquial. Diálogos breves adaptados a cada personaje. Fragmentación estructural y tono áspero. Apreciamos repeticiones, efectos rítmicos y paralelismos.</p>`},
+
+  {id:'n-visillos',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.2.2 Carmen Martín Gaite — Entre Visillos (1958)',body:`
+<p>Trama sostenida por varios personajes femeninos jóvenes cuyas charlas revelan la monotonía de una sociedad con expectativas vitales muy reducidas. Pablo Klein, joven profesor de alemán, llega a la ciudad y su carácter abierto choca con el conservadurismo local.</p>
+<h4>Temas</h4>
+<ul>
+  <li>El papel de las mujeres en la dictadura; la moral del nacionalcatolicismo.</li>
+  <li>El poder de la iglesia; la segregación educativa clasista y de género.</li>
+  <li>La vida rutinaria e insulsa de una ciudad provinciana; la incomunicación.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p>Combina un <strong>narrador externo en tercera persona</strong> y dos narradores internos en primera persona: <strong>Pablo Klein</strong> (objetividad) y <strong>Natalia</strong> (diario íntimo, da voz a las mujeres). Esto rompe con las técnicas del Realismo. Transcurre en los <strong>años 50</strong> con un relato cronológico lento y sin saltos temporales.</p>
+<h4>Estilo</h4>
+<p>Diálogos espontáneos que reflejan el habla de los personajes. Registro coloquial. Citas, frases hechas, palabras de relleno, repeticiones.</p>`},
+
+  {id:'n-60',sec:'narrativa',badge:'Años 60',badgeClass:'b60',title:'2.3 Años 60: La novela experimental',open:true,body:`
+<p>España experimenta una transformación económica con el «desarrollismo» (Plan de Estabilización de 1959), pero el régimen sigue siendo una dictadura con censura estricta. Hacia finales de los 50 el modelo social se agota. Llegan influencias de Faulkner, Joyce, Rulfo y el Boom hispanoamericano.</p>
+<h4>Características</h4>
+<ul>
+  <li><strong>Desaparición del argumento clásico y lineal:</strong> digresiones constantes, relaciones entre hechos poco claras.</li>
+  <li><strong>Perspectiva múltiple:</strong> distintas personas narrativas; predilección por la 2ª persona («tú desdoblado»).</li>
+  <li><strong>Estilo directo libre</strong> y <strong>monólogo interior</strong> (el pensamiento fluye libremente).</li>
+  <li><strong>Abandono de la división en capítulos;</strong> ruptura de la temporalidad lineal (flash-back, flash-forward).</li>
+  <li><strong>Dimensión simbólica:</strong> los hechos se convierten en parábolas de la condición humana.</li>
+  <li>Lenguaje metafórico, sintaxis compleja, parodia e ironía. Estilo «elevado» para realidades vulgares (contraste).</li>
+  <li>Referencias a mitos clásicos y obras literarias como punto de comparación o parodia.</li>
+  <li>Personajes vitalmente desorientados con graves problemas de identidad.</li>
+</ul>`},
+
+  {id:'n-silencio',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.3.1 Luis Martín Santos — Tiempo de silencio (1962)',body:`
+<p>Considerada la novela más importante de la narrativa española de posguerra y punto de inflexión en la literatura española. Martín Santos, psiquiatra y escritor comprometido, murió en accidente de tráfico en 1964 dejando esta obra como único legado. Supone una <strong>ruptura radical con el realismo social</strong> e introduce el monólogo interior y el perspectivismo (influencia de Joyce, Faulkner, Dos Passos).</p>
+<p>Narra las desventuras de <strong>Pedro</strong>, joven investigador médico cuya dependencia de ratones criados ilegalmente en chabolas lo arrastra a una espiral de degradación y fracaso definitivo. El título alude al silencio impuesto por la dictadura.</p>
+<h4>Temas</h4>
+<ul>
+  <li>El fracaso individual como síntoma colectivo: Pedro fracasa porque la España franquista imposibilita el progreso genuino.</li>
+  <li>Crítica a la mediocridad cultural y la hipocresía social.</li>
+  <li>La marginalidad: contraste entre chabolas, prostíbulos y círculos burgueses.</li>
+  <li>La imposibilidad del conocimiento, reflejada en el fracaso de la investigación científica.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p><strong>Tercera persona</strong> que adopta constantemente la perspectiva interior del protagonista mediante monólogo interior y estilo indirecto libre. A veces se distancia irónicamente para ofrecer visión satírica. Acción en <strong>Madrid</strong>, en un tiempo breve tratado de forma no lineal. Los espacios (laboratorio ruinoso, chabolas, barrio burgués, prostíbulo) son representación simbólica de las fracturas sociales.</p>
+<h4>Estilo</h4>
+<p>Barroco, culto y deliberadamente hiperbólico. Mezcla de registros: científico, coloquial, filosófico y paródico. Frases largas con sintaxis compleja que imitan el flujo del pensamiento. Digresiones ensayísticas. Tono oscilante entre patetismo, denuncia e ironía fina.</p>`},
+
+  {id:'n-mario',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.3.2 Miguel Delibes — Cinco horas con Mario (1966)',body:`
+<p>Uno de los libros más importantes de Delibes y de la narrativa de los 60. Supone un paso hacia la narrativa experimental. Fue adaptada al teatro en 1979 con Lola Herrera.</p>
+<p>La obra presenta a <strong>Carmen</strong>, mujer burguesa y conservadora, velando el cadáver de su marido <strong>Mario</strong>, profesor de ideas progresistas. Durante cinco horas, Carmen habla sin interrupción al difunto en un <strong>monólogo dramático</strong> que revela las profundas contradicciones de su carácter y el abismo ideológico entre los dos.</p>
+<h4>Temas</h4>
+<ul>
+  <li>La incomunicación conyugal y el conflicto entre las <strong>dos Españas irreconciliables</strong>.</li>
+  <li>La hipocresía de la burguesía franquista; el papel subordinado de la mujer.</li>
+  <li>Crítica al nacionalcatolicismo como ideología que ahoga cualquier impulso de cambio.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p>Primera persona mediante <strong>monólogo dramático</strong>: Carmen habla al cadáver sin que este pueda responder. El lector reconstruye la figura de Mario a partir de las contradicciones de Carmen, que se autodelata sin saberlo. Acción en una <strong>única noche</strong>, en el cuarto donde se vela el cadáver (unidad casi teatral). Los capítulos se articulan en torno a versículos del Evangelio subrayados por Mario.</p>
+<h4>Estilo</h4>
+<p>Coloquial, repetitivo, lleno de frases hechas que retratan el mundo mental de Carmen. La vulgaridad del discurso es el principal instrumento de crítica social. El <strong>humor involuntario</strong> de sus contradicciones convierte la novela en una sátira de la mentalidad burguesa franquista.</p>`},
+
+  {id:'n-70',sec:'narrativa',badge:'Años 70+',badgeClass:'b70',title:'2.4 Años 70+: La novela de aventura, intriga, acción y humor',body:`
+<p>Desde mediados de los 70, tras la muerte de Franco y el inicio de la Transición, la desaparición de la censura abre nuevas posibilidades. Se recupera la <strong>«narratividad»</strong>: el gusto por contar historias, rompiendo con los excesos experimentales de los 60-70. Novelistas importantes: <strong>Eduardo Mendoza</strong> (<em>La verdad sobre el caso Savolta</em>, 1975) y <strong>Manuel Vázquez Montalbán</strong> (serie del detective Pepe Carvalho).</p>
+<h4>Características</h4>
+<ul>
+  <li>Tramas de novela policíaca y de aventuras: predomina la intriga; argumentos construidos para atrapar al lector.</li>
+  <li>Sin complicaciones de lectura: claridad y accesibilidad frente a la dificultad experimental.</li>
+  <li>Elementos humorísticos y situaciones paródicas.</li>
+  <li>Radiografía de hábitos y clases sociales contemporáneas.</li>
+  <li>Técnicas de la novela moderna (retrocesos temporales, distintas voces) al servicio de la historia.</li>
+  <li>Diálogo coloquial muy presente; personajes bien definidos por sus acciones.</li>
+  <li>Presencia característica de la figura del «detective» o investigador.</li>
+</ul>`},
+
+  {id:'n-80psi',sec:'narrativa',badge:'Años 80+',badgeClass:'b80',title:'2.5 Años 80+: La novela del análisis psicológico',body:`
+<p>Surge a partir de los años 80 y se desarrolla hasta la actualidad. Actualiza el <strong>realismo psicológico</strong> consagrado por la tradición (Stendhal, Dostoievski, Galdós, Henry James, novela de folletín del XIX).</p>
+<h4>Características</h4>
+<ul>
+  <li>Se centran en la <strong>«intimidad»</strong> de los personajes: frustraciones, desencantos, relaciones de pareja, familia, amistad.</li>
+  <li>Relevancia especial del reflejo de pensamientos, sentimientos y estados de ánimo (primera persona y monólogos interiores).</li>
+  <li>Incorporan técnicas de la novela actual: a) distintas voces narrativas, b) monólogos interiores, c) temporalidad no lineal (flashback), d) metaficción.</li>
+  <li>Telón de fondo: la sociedad española de las últimas décadas del XX o del XXI, si bien predomina lo individual sobre lo social.</li>
+</ul>`},
+
+  {id:'n-80mem',sec:'narrativa',badge:'Años 80+',badgeClass:'b80',title:'2.6 Años 80+: La narrativa de la memoria histórica',body:`
+<p>La dictadura impuso una versión oficial que silenciaba la memoria de los vencidos. Con la Transición, el «pacto del olvido» pretendió evitar reabrir heridas. Pero a partir de los 80, y con mayor intensidad desde los 90, una nueva generación reivindica esa memoria silenciada. La <strong>Ley de Memoria Histórica</strong> (2007) refleja cómo esta recuperación se convirtió en petición social y política.</p>
+<h4>Características</h4>
+<ul>
+  <li>Se centran en la Guerra Civil, el ambiente prebélico y la vida cotidiana bajo el franquismo (1939-1975).</li>
+  <li>Tramas bien documentadas, basadas en hechos reales con personajes históricos junto a ficticios.</li>
+  <li>Marcado componente ético: denuncia de injusticias, reivindicación de la dignidad de los vencidos (mujeres, guerrilleros, presos políticos, exiliados).</li>
+  <li>El retrato social e histórico importa más que las trayectorias individuales.</li>
+  <li>Técnicas posmodernas: temporalidad no lineal, multiplicidad de voces, monólogos interiores.</li>
+</ul>`},
+
+  {id:'n-auto',sec:'narrativa',badge:'Años 80-90+',badgeClass:'b80',title:'2.7 Años 80-90+: La autoficción',body:`
+<p>Tendencia basada en la incorporación al texto de hechos pertenecientes a la biografía del autor y personajes o anécdotas reales. Tiene precedentes lejanos (Dante, Arcipreste de Hita, Lope de Vega) pero tal como la conocemos surge a finales del XX y se consolida en el XXI.</p>
+<h4>Modalidades</h4>
+<ul>
+  <li><strong>Mezcla de hechos reales y ficticios:</strong> deliberada ambigüedad sobre qué es real y qué ficticio. Ej. Javier Marías: <em>Todas las almas</em> (1989); A. Muñoz Molina: <em>El jinete polaco</em> (1991); Javier Cercas: <em>Soldados de Salamina</em> (2001).</li>
+  <li><strong>Datos biográficos como eje estructurador</strong> de una identidad (autobiografía novelada). Ej. Vila-Matas: <em>París no se acaba nunca</em> (2003); Rosa Montero: <em>La ridícula idea de no volver a verte</em> (2013); Manuel Vilas: <em>Ordesa</em> (2018).</li>
+  <li><strong>Materiales del mundo real</strong> («inspirado en hechos reales») con límites desdibujados entre realidad y ficción, y reflexiones sobre el proceso de creación novelística.</li>
+</ul>`},
+
+  {id:'n-trans',sec:'narrativa',badge:'Años 90+',badgeClass:'b90',title:'2.8 Años 90+: El relato de la Transición y la democracia',body:`
+<p>Desde los años 90, novelistas españoles dirigen su mirada crítica hacia el pasado reciente: los años finales de la dictadura, la Transición, y las luces y sombras de la España democrática.</p>
+<h4>Características</h4>
+<ul>
+  <li>Visión crítica y desmitificadora de la historia reciente, cuestionando los relatos optimistas sobre la Transición.</li>
+  <li>Combinan el retrato social colectivo con trayectorias individuales: lo personal y lo político se entrelazan.</li>
+  <li>Los ambientes urbanos y entornos sociales específicos (mundo empresarial, barrios obreros, familias burguesas) tienen protagonismo como escenarios de cambio histórico.</li>
+  <li>Técnicas posmodernas: temporalidad no lineal, multiplicidad de voces narrativas, metaficción.</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>La corrupción política y económica; el desencanto ideológico de la generación de la Transición.</li>
+  <li>La violencia terrorista (ETA, GRAPO) y sus consecuencias humanas.</li>
+  <li>La especulación inmobiliaria y financiera; el impacto de la crisis económica de 2008.</li>
+  <li>Pérdida de valores, consumismo, individualismo, precariedad laboral.</li>
+</ul>`},
+
+  {id:'n-lat',sec:'narrativa',badge:'Latinoamérica',badgeClass:'bLat',title:'2.9 El realismo mágico y el Boom latinoamericano',open:true,body:`
+<p>El Realismo Mágico surge en los años 30 en Latinoamérica y alcanza su mayor desarrollo en los 60-70. Lo extraño, lo mágico y lo sobrenatural se integran de manera natural en un marco realista y cotidiano. Se desarrolla en un contexto de inestabilidad política, dictaduras, desigualdad social y la influencia de la Guerra Fría.</p>
+<p>Surge como respuesta al <strong>mestizaje latinoamericano</strong>: yuxtaposición del pensamiento mítico y mágico de las culturas indígenas con la modernidad racional europea.</p>
+<h4>Características</h4>
+<ul>
+  <li>Abundancia de voces narrativas y uso del monólogo interior.</li>
+  <li>Ruptura de planos temporales: flashback, acciones paralelas simultáneas.</li>
+  <li>Presencia de elementos o personajes con atributos o poderes mágicos percibidos como parte de la normalidad.</li>
+  <li>Descripciones minuciosas de espacios; lenguaje elaborado y cargado de recursos de estilo.</li>
+  <li>Incorporación de mitos y leyendas donde no se diferencia lo real de lo imaginado.</li>
+  <li>Crítica del poder establecido y de la explotación social.</li>
+</ul>`},
+
+  {id:'n-cronica',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.9.1 Gabriel García Márquez — Crónica de una muerte anunciada (1981)',body:`
+<p>Publicada en 1981, se inspira en un hecho real de la juventud del autor. Se sitúa en una comunidad pequeña, tradicional y cerrada, regida por rígidos códigos de honor. Desde la primera línea se presenta el asesinato de Santiago Nasar, eliminando el suspense para desplazar el interés hacia el análisis de causas y responsabilidades.</p>
+<h4>Temas</h4>
+<ul>
+  <li>La violencia ligada al código de honor; el machismo y el destino inevitable.</li>
+  <li>La religión y la superstición; la sexualidad y los placeres cotidianos.</li>
+  <li>La violencia como hecho social aceptado y colectivamente responsable.</li>
+  <li>El humor irónico y negro contrasta con la brutalidad del relato.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p>Primera persona: <strong>narrador-cronista-investigador</strong> que reconstruye el asesinato a partir de testimonios múltiples. El multiperspectivismo impide una verdad única. Acción en un <strong>pueblo caribeño de Colombia</strong>. Tiempo no lineal: continuos flashbacks y anticipaciones que se extienden muchos años antes y después del crimen. Sensación de <strong>fatalidad</strong> e inevitabilidad.</p>
+<h4>Estilo</h4>
+<p>Sobrio, claro y preciso. Influencia <strong>periodística</strong>. Estructura fragmentaria, desorden temporal, ironía. Lenguaje que mezcla lo trágico con lo humorístico.</p>`},
+
+  {id:'n-casa',sec:'narrativa',badge:'Obra',badgeClass:'bObra',title:'2.9.2 Isabel Allende — La casa de los espíritus (1982)',body:`
+<p>Primera novela de Isabel Allende. Se inspira en la historia familiar de la autora y su exilio tras el golpe de estado en Chile (1973). Combina la historia privada con la historia nacional. La narración es un relato retrospectivo que busca preservar el pasado frente al olvido.</p>
+<h4>Temas</h4>
+<ul>
+  <li>La memoria, la violencia política, la lucha de clases, el patriarcado y el poder.</li>
+  <li>El amor, la resistencia, la justicia social.</li>
+  <li>El papel de la mujer en una sociedad dominada por estructuras masculinas autoritarias.</li>
+  <li>La escritura como acto de resistencia y reconstrucción.</li>
+</ul>
+<h4>Narrador, Espacio y Tiempo</h4>
+<p><strong>Narrador múltiple:</strong> predomina la primera persona de <strong>Alba</strong> (reconstruye la historia familiar), alternando con fragmentos de <strong>Esteban Trueba</strong>. Espacio principal: la hacienda <strong>Las Tres Marías</strong> y la <strong>gran casa de la esquina</strong> (escenarios simbólicos). El tiempo abarca <strong>varias décadas y generaciones</strong>, de forma no cronológica.</p>
+<h4>Realismo Mágico y Estilo</h4>
+<p>Presencia de espíritus, premoniciones y fenómenos paranormales como parte de la realidad cotidiana. Prosa lírica y detallada. Tono emotivo, simbolismo, mezcla de lo íntimo y lo político.</p>`},
+
+  // ══════════════════════════════════════════════════
+  // 3. POESÍA
+  // ══════════════════════════════════════════════════
+  {id:'p-4050',sec:'poesia',badge:'Años 40-50',badgeClass:'b40',title:'3.1 La poesía de los años 40 y 50',open:true,body:`
+<div class="tc">
+  <div class="tc-box">
+    <h5>Poesía Arraigada</h5>
+    <p>Comparte los ideales de los vencedores. Temas heroicos o intemporales.</p>
+    <p><strong>Temas:</strong> la patria, el pasado glorioso, el fervor religioso, la belleza del paisaje, la vida familiar.</p>
+    <p><strong>Lenguaje:</strong> culto; formas clásicas (ej. soneto).</p>
+  </div>
+  <div class="tc-box">
+    <h5>Poesía Desarraigada (Rehumanizadora)</h5>
+    <p>Expresa angustia y desesperanza. Poesía <em>existencial</em>.</p>
+    <p><strong>Temas:</strong> sentido de la vida, sufrimiento, miseria moral, silencio de Dios, soledad, angustia, miedo.</p>
+    <p><strong>Lenguaje:</strong> léxico violento, encabalgamientos, aliteraciones. También lenguaje coloquial para lo cotidiano. Formas tradicionales y verso libre.</p>
+  </div>
+</div>
+<h4>Poesía Social (Años 50)</h4>
+<p>En los años 50 se alterna la poesía existencial con un nuevo tipo de lírica que denuncia las injusticias sociales y proclama la solidaridad con los desfavorecidos. La poesía se concibe como <strong>instrumento de lucha y transformación social</strong>. Será predominante en la segunda mitad de la década.</p>
+<ul>
+  <li><strong>Temas:</strong> injusticias sociales, solidaridad, el «tema de España» (deseo de libertad y paz).</li>
+  <li><strong>Lenguaje:</strong> predomina el verso libre; lenguaje coloquial para acercarse a cualquier lector.</li>
+</ul>`},
+
+  {id:'p-otero',sec:'poesia',badge:'Poeta',badgeClass:'bPoeta',title:'3.1.1 Blas de Otero (1916–1979)',body:`
+<p>Figura más representativa de la poesía española de posguerra. Su obra, breve pero de enorme intensidad, recorre un camino desde la angustia existencial más íntima hasta la denuncia social colectiva.</p>
+<h4>Características</h4>
+<ul>
+  <li>Poesía de <strong>gran intensidad emocional</strong>: carga emotiva excepcional en todas sus etapas.</li>
+  <li><strong>Dominio de la tradición métrica clásica:</strong> el soneto es su forma predilecta en la primera etapa, con una maestría que contrasta con la violencia del contenido.</li>
+  <li>Uso expresivo del lenguaje: juegos de palabras, aliteraciones, paradojas, exclamaciones e interrogaciones retóricas.</li>
+  <li>En la etapa social, el lenguaje se simplifica, se vuelve directo, coloquial y accesible.</li>
+  <li>Diálogo constante con la tradición literaria española: Quevedo, Unamuno, Antonio Machado.</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>La angustia existencial ante la muerte y el silencio de Dios.</li>
+  <li>La búsqueda desesperada de sentido.</li>
+  <li>La solidaridad con el pueblo español oprimido por el franquismo.</li>
+  <li>La fe en el ser humano como sustituto de la fe religiosa perdida.</li>
+  <li>La palabra poética como acto de rebeldía y afirmación de la vida.</li>
+</ul>
+<h4>Etapas</h4>
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Etapa 1 — Existencial y religiosa</div>
+    <div class="etapa-titulo">Ángel fieramente humano (1950) / Redoble de conciencia (1951) → Ancia</div>
+    <p>Angustia existencial y religiosa devastadora. El poeta se dirige a un Dios que calla en un diálogo desesperado sobre la muerte y el sentido de la existencia. El soneto contrasta con la violencia emocional del contenido.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 2 — Social y colectiva</div>
+    <div class="etapa-titulo">Pido la paz y la palabra (1955)</div>
+    <p>Giro decisivo: abandona el «tú» divino y se dirige a un «tú» humano y colectivo. Poesía de denuncia y solidaridad. El lenguaje se simplifica y se hace directo y accesible para «la inmensa mayoría».</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 3 — Experimental</div>
+    <div class="etapa-titulo">Que trata de España (1964) / Mientras (1970)</div>
+    <p>Incorpora técnicas vanguardistas: verso libre más radical, collage de textos, juegos tipográficos. Sin abandonar el compromiso político.</p>
+  </div>
+</div>`},
+
+  {id:'p-60',sec:'poesia',badge:'Años 60',badgeClass:'b60',title:'3.2 La promoción poética de los sesenta (Generación del 50-60)',open:true,body:`
+<p>En la década de 1960, un conjunto de poetas alcanza su madurez. Nacidos entre 1925 y 1938, son los «niños de la guerra». Para ellos la poesía es una forma de <strong>comunicación y conocimiento de la realidad y de sí mismos</strong>.</p>
+<p><strong>Autores:</strong> Ángel González, José Agustín Goytisolo, José Ángel Valente, Jaime Gil de Biedma, Francisco Brines, Claudio Rodríguez, M. Victoria Atencia.</p>
+<h4>Temas</h4>
+<ul>
+  <li>La evocación de la infancia, la adolescencia y la juventud; el recuerdo de la guerra civil.</li>
+  <li>Las relaciones familiares y de amistad; el amor y el erotismo.</li>
+  <li>La soledad y el paso del tiempo; la celebración de la belleza cotidiana.</li>
+  <li>La crítica a la burguesía (clase social a la que pertenecen muchos de ellos).</li>
+  <li>La reflexión sobre la propia poesía y su sentido.</li>
+</ul>
+<h4>Lenguaje y Métrica</h4>
+<ul>
+  <li>Lenguaje elaborado pero natural y <strong>antirretórico</strong>: combinan imágenes líricas con tono conversacional y narrativo.</li>
+  <li>La <strong>ironía</strong> ocupa un lugar central: herramienta crítica y actitud distanciada ante la burguesía.</li>
+  <li>Predomina el <strong>verso libre</strong>, aunque hay composiciones con versificación tradicional (para efecto de solemnidad o contraste irónico).</li>
+</ul>`},
+
+  {id:'p-gil',sec:'poesia',badge:'Poeta',badgeClass:'bPoeta',title:'3.2.1 Jaime Gil de Biedma (1929–1990)',body:`
+<p>Una de las voces más personales de la Generación del 50-60. Reunió toda su producción bajo el título <em>Las personas del verbo</em> (1975). Destaca por la coherencia de su voz y la profundidad de su reflexión sobre la experiencia vivida.</p>
+<h4>Características</h4>
+<ul>
+  <li><strong>Tono conversacional e irónico:</strong> registro del habla cotidiana; estilo antirretórico y directo.</li>
+  <li><strong>Autobiografismo y autoexamen:</strong> el yo poético es siempre el propio poeta, que se observa a sí mismo con lucidez y sin piedad.</li>
+  <li><strong>Influencia anglosajona:</strong> Auden, T.S. Eliot (tono coloquial, estructura narrativa, ironía intelectual).</li>
+  <li>Elaboración formal cuidada bajo la apariencia de naturalidad.</li>
+  <li>Predominio del verso libre con musicalidad interna marcada; a veces recurre al endecasílabo para contraste o solemnidad irónica.</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>El paso del tiempo y la pérdida de la juventud; el deseo y el amor erótico.</li>
+  <li>La memoria de la infancia y la guerra civil.</li>
+  <li>La crítica a la burguesía desde dentro, con la conciencia incómoda de quien pertenece a la clase que censura.</li>
+  <li>La distancia entre quien se fue y quien se es; la poesía como ajuste de cuentas con la experiencia.</li>
+</ul>
+<h4>Etapas</h4>
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Etapa 1</div>
+    <div class="etapa-titulo">Compañeros de viaje (1959)</div>
+    <p>Contexto de posguerra y conciencia generacional marcada por la guerra civil. Evocación de la infancia y tímida crítica social. Tono melancólico y reflexivo.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 2</div>
+    <div class="etapa-titulo">Moralidades (1966) — su libro más celebrado</div>
+    <p>Mirada irónica y lúcida sobre la burguesía barcelonesa, el amor y el sentido de la vida. El poema como acto de autoexamen sin concesiones.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 3</div>
+    <div class="etapa-titulo">Poemas póstumos (1968)</div>
+    <p>Mayor intensidad elegíaca. El paso del tiempo, el envejecimiento y la conciencia de la muerte dominan una escritura que mira hacia atrás con lucidez y desencanto. <em>No volveré a ser joven</em> condensa el tono de esta etapa.</p>
+  </div>
+</div>`},
+
+  {id:'p-70nov',sec:'poesia',badge:'Años 70',badgeClass:'b70',title:'3.3 La generación de 1970: los Novísimos',open:true,body:`
+<p>En 1970, José María Castellet publica la antología <em>Nueve novísimos poetas españoles</em> con poetas que pretenden romper radicalmente con la tradición, especialmente con la poesía realista y social de los 50-60. Son poetas que crecen en una España saturada de televisión, cine, publicidad y cultura de masas.</p>
+<p><strong>Autores:</strong> Manuel Vázquez Montalbán, Antonio Martínez Sarrión, José María Álvarez, Félix de Azúa, Pere Gimferrer, Vicente Molina Foix, Guillermo Carnero, Ana María Moix, Leopoldo Mª Panero. También: Luis Antonio de Villena, Antonio Colinas.</p>
+<h4>Temas</h4>
+<ul>
+  <li><strong>Cultura popular:</strong> el cómic, la música pop, la publicidad, el cine → contenido poético legítimo.</li>
+  <li><strong>Culturalismo:</strong> referentes de la cultura elitista (arte, música clásica, mitología, Venecia, Bizancio, Durero, Chopin, Oscar Wilde).</li>
+  <li>Celebración sensorial: belleza, placeres de la vida, viajes, cultura y arte.</li>
+</ul>
+<h4>Lenguaje y Métrica</h4>
+<ul>
+  <li>Plena libertad formal: sin metros ni rimas tradicionales; sintaxis cercana a la prosa.</li>
+  <li>Combinan registros coloquiales con referencias culturales muy elaboradas (tensión entre popular y culto).</li>
+  <li>Técnicas cercanas a la escritura «automática»: asociaciones libres e imágenes sorprendentes.</li>
+</ul>`},
+
+  {id:'p-gim',sec:'poesia',badge:'Poeta',badgeClass:'bPoeta',title:'3.3.1 Pere Gimferrer (1945)',body:`
+<p>Figura más emblemática y precoz de los Novísimos, situado al frente de la antología de 1970. Toda su producción en castellano quedó reunida bajo el título <em>Poemas (1963-1969)</em>, tras lo cual tomó una decisión radical: <strong>abandonar el español y escribir exclusivamente en catalán</strong>.</p>
+<p>En <em>Arde el mar</em> (1966), su obra más celebrada, despliega un universo poético de extraordinaria riqueza sensorial: Venecia, el cine de Hollywood, la pintura simbolista y el mundo grecolatino se mezclan con imágenes de intensidad visual casi cinematográfica.</p>
+<h4>Características</h4>
+<ul>
+  <li><strong>Deslumbramiento sensorial e imagen cinematográfica:</strong> poemas que construyen escenas de gran plasticidad visual, con imágenes intensas y fragmentadas que recuerdan al montaje cinematográfico.</li>
+  <li><strong>Culturalismo desbordante:</strong> referencias al cine clásico, la pintura, la música y la literatura como experiencia vivida, no como erudición decorativa.</li>
+  <li>Influencia del surrealismo y el simbolismo francés (Rimbaud, Baudelaire).</li>
+  <li>Verso libre de aliento largo; musicalidad interna muy marcada.</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>La belleza como experiencia absoluta; el cine y las artes como formas de conocimiento sensorial.</li>
+  <li>El mundo mediterráneo y sus referentes culturales (Venecia, Bizancio, la Antigüedad clásica).</li>
+  <li>El deseo como fuerza que impulsa la vida y la escritura.</li>
+  <li>Los límites de la expresión poética; la memoria y la identidad cultural catalana.</li>
+</ul>`},
+
+  {id:'p-70conf',sec:'poesia',badge:'Años 70',badgeClass:'b70',title:'3.4 Otra tendencia del 70: Poesía confesional y retorno al sentimiento',body:`
+<p>Paralelamente a los Novísimos, otros poetas de la misma generación (nacidos a finales de los 40 o comienzos de los 50) proponen el regreso a la literatura del «yo», la restauración de la biografía y el rechazo del esteticismo experimental. Enlazan con la Generación del 50-60, especialmente con Gil de Biedma. Son <strong>precedente directo de las poéticas de la experiencia</strong>.</p>
+<h4>Temas</h4>
+<ul>
+  <li>Los sentimientos propios: alegría, tristeza, miedo, soledad, melancolía.</li>
+  <li>El amor y el erotismo; la autobiografía como recuperación de la memoria personal y familiar.</li>
+  <li>La solidaridad con los demás («poesía solidaria y humana»).</li>
+  <li>La belleza de las cosas y la naturaleza; el paso del tiempo y la nostalgia (tono elegíaco).</li>
+</ul>
+<h4>Lenguaje y Métrica</h4>
+<ul>
+  <li>Lenguaje sencillo y accesible (poesía «figurativa» frente a la «abstracta» de los Novísimos).</li>
+  <li>Estilo narrativo y conversacional; verso libre sin radicalismo formal.</li>
+</ul>
+<p><strong>Algunos poetas:</strong> Juan Luis Panero, Eloy Sánchez Rosillo, Luis Alberto de Cuenca, Andrés Trapiello, Miguel D'Ors, Ana Rosetti.</p>`},
+
+  {id:'p-80exp',sec:'poesia',badge:'Años 80-90',badgeClass:'b80',title:'3.5 Años 80-90: Las poéticas de la experiencia',body:`
+<p>Tendencia heterogénea surgida a partir de los 80, con mayor consolidación en los 90. La mayoría de sus poetas nacen en los años 60. Recoge el testigo de la poesía confesional y de la tradición de Gil de Biedma. Es una reacción frente al experimentalismo hermético de los Novísimos.</p>
+<h4>Características</h4>
+<ul>
+  <li>El poema parte de <strong>experiencias vitales concretas</strong> pero no las describe literalmente: el poeta se desdobla y actúa como testigo distanciado de su propia vida.</li>
+  <li>Evita las efusiones sentimentales; busca la complicidad con el lector mediante la <strong>ironía</strong> y la contención emocional.</li>
+  <li>El «yo» poético tiene un peso central pero se recrea como si fuera una ficción o un personaje teatral.</li>
+  <li><strong>Impresión de verdad y cotidianeidad:</strong> el poema debe parecer natural, como si el lector pudiera decir «así hablaría yo si escribiera poesía».</li>
+  <li><strong>Escenarios urbanos:</strong> taxis, semáforos, supermercados, hoteles, el metro… La ciudad del siglo XX-XXI.</li>
+</ul>
+<h4>Lenguaje y Métrica</h4>
+<p>Estilo coloquial y prosaico, próximo al habla cotidiana. Trabajo notable sobre el lenguaje para conseguir ese efecto de naturalidad. Predomina el verso libre.</p>
+<p><strong>Algunos poetas:</strong> Luis García Montero, Aurora Luque, Almudena Guzmán, Felipe Benítez Reyes.</p>`},
+
+  {id:'p-otras',sec:'poesia',badge:'Años 80+',badgeClass:'b80',title:'3.6 Otras tendencias: Neosurrealismo, Nueva Épica, Poesía Metafísica',body:`
+<h4>Neosurrealismo</h4>
+<p>Recupera las técnicas irracionales y oníricas del surrealismo histórico, actualizadas con los referentes de la cultura popular contemporánea (drogas, rock, cómic). Imágenes sorprendentes, ilógicas y de gran intensidad sensorial; sintaxis fragmentada; verso libre absoluto. <strong>Blanca Andreu:</strong> <em>De una niña de provincias que se vino a vivir en un Chagall</em> (1981).</p>
+<h4>Nueva Épica</h4>
+<p>Recupera la memoria colectiva desde una perspectiva intimista y evocadora. El poeta rescata un espacio y un tiempo perdidos —la infancia, el mundo rural desaparecido— con un tono elegíaco y melancólico. La naturaleza actúa como eje simbólico. <strong>Julio Llamazares:</strong> <em>La lentitud de los bueyes</em> (1979).</p>
+<h4>Poesía Metafísica / Poesía del Silencio</h4>
+<p>Indaga en los grandes interrogantes que rodean al ser humano desde una actitud filosófica y contemplativa. El lenguaje tiende a la depuración y al despojamiento: elimina lo accesorio en busca de la palabra exacta. Conviven poemas largos y reflexivos con composiciones brevísimas y fragmentarias (minimalismo). Tuvo un precedente destacado en <strong>José Ángel Valente</strong>.</p>
+<h4>Características (Poesía metafísica)</h4>
+<ul>
+  <li>El poema como espacio de búsqueda, no de respuestas.</li>
+  <li>La mirada se dirige hacia lo cotidiano y lo aparentemente insignificante, que revela una dimensión de misterio.</li>
+  <li>Tendencia a la depuración y al despojamiento.</li>
+  <li>El «yo» tiende a disolverse en un movimiento hacia la unidad con la Naturaleza o lo Absoluto.</li>
+</ul>
+<p><strong>Algunos poetas:</strong> Clara Janés, Antonio Colinas, Olvido García Valdés, Ada Salas, Chantal Maillard.</p>`},
+
+  {id:'p-lat',sec:'poesia',badge:'Latinoamérica',badgeClass:'bLat',title:'3.7 La poesía latinoamericana del siglo XX (tendencias)',open:true,body:`
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Poesía Modernista</div>
+    <div class="etapa-titulo">Herencia de finales del XIX y comienzos del XX</div>
+    <p><strong>Rasgos:</strong> temas exóticos, ritmo muy marcado, musicalidad, metáforas, sinestesias, aliteraciones. <strong>Poetas:</strong> Gabriela Mistral, Juana de Ibarbourou, Pablo Neruda (primeras obras) y César Vallejo.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Poesía Intimista, Cotidiana y Solidaria</div>
+    <div class="etapa-titulo">Temas de la vida cotidiana y el ser humano</div>
+    <p><strong>Rasgos:</strong> el dolor, la soledad, la muerte, la solidaridad, el amor («neorromanticismo») y el erotismo como conocimiento del «otro». Lenguaje depurado del exceso ornamental modernista. <strong>Poetas:</strong> Neruda, Vallejo, Octavio Paz.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Poesía de Vanguardia</div>
+    <div class="etapa-titulo">Cubismo, futurismo, dadaísmo, creacionismo, surrealismo…</div>
+    <p><strong>Rasgos:</strong> juegos de palabras, imágenes oníricas o irracionales, sintaxis dislocada, caligramas. <strong>Poetas:</strong> Vicente Huidobro (creacionismo); Vallejo y Neruda incorporan vanguardia en los 20-30; Octavio Paz retoma propuestas en los 60.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Poesía de la Negritud</div>
+    <div class="etapa-titulo">Inspiración en la herencia africana e hispánica</div>
+    <p><strong>Rasgos:</strong> mestizaje, folclore, ritmos, tradiciones y mitos afrocubanos; crítica de la injusticia y la explotación humana. <strong>Poeta principal:</strong> Nicolás Guillén (Cuba, 1902-1989).</p>
+  </div>
+</div>`},
+
+  {id:'p-neruda',sec:'poesia',badge:'Poeta',badgeClass:'bPoeta',title:'3.7.1 Pablo Neruda',body:`
+<p>La obra de Neruda refleja una evolución constante vinculada a su experiencia vital y a los acontecimientos históricos de su tiempo.</p>
+<h4>Características</h4>
+<ul>
+  <li><strong>Lenguaje sensorial y metafórico:</strong> imágenes intensas de la naturaleza, el cuerpo humano, los objetos cotidianos y el cosmos.</li>
+  <li><strong>Tono apasionado y emotivo:</strong> amor, deseo, angustia, soledad y melancolía con gran carga emocional.</li>
+  <li><strong>Verso libre</strong> con ritmo marcado por la musicalidad interna.</li>
+  <li><strong>Influencia del surrealismo</strong> (especialmente en <em>Residencia en la tierra</em>).</li>
+  <li><strong>Compromiso social y político</strong> en su etapa madura (justicia social, trabajadores, pueblos oprimidos).</li>
+  <li><strong>Humanización de lo cotidiano:</strong> convierte objetos simples en protagonistas poéticos (<em>Odas elementales</em>).</li>
+</ul>
+<h4>Etapas</h4>
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Etapa 1 — Modernista e intimista</div>
+    <div class="etapa-titulo">Veinte poemas de amor y una canción desesperada (1924)</div>
+    <p>Influencia del modernismo atenuado, ya superado en su exceso ornamental. Lenguaje metafórico, sensual y melancólico, con formas poéticas reconocibles y ritmo marcado. Temas: el amor y el desamor, el deseo erótico, la soledad y la melancolía. La naturaleza actúa como espejo del estado emocional del yo poético. Tono apasionado, subjetivo y profundamente lírico.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 2 — Hermética y vanguardista</div>
+    <div class="etapa-titulo">Residencia en la tierra (1933-1935)</div>
+    <p>Ruptura radical con la poesía sentimental anterior. Influida por el surrealismo y las vanguardias. Lenguaje hermético, imágenes irracionales y asociaciones oníricas de gran complejidad. Destruye la lógica del discurso poético tradicional. Temas: angustia existencial, caos del mundo, desarraigo, alienación y desesperanza. Considerada una de las obras más oscuras y complejas de la poesía en lengua española.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 3 — Épica y comprometida</div>
+    <div class="etapa-titulo">Canto general (1950)</div>
+    <p>Lenguaje más accesible y directo, cargado de lirismo épico y denuncia política. Fuerte compromiso político y social, influido por el comunismo y la conciencia histórica latinoamericana. Temas: historia e identidad de América Latina, exaltación de los pueblos oprimidos, naturaleza americana, lucha por la justicia social. El yo poético se diluye en una voz coral que representa la experiencia colectiva de los pueblos americanos.</p>
+  </div>
+</div>`},
+
+  {id:'p-vallejo',sec:'poesia',badge:'Poeta',badgeClass:'bPoeta',title:'3.7.2 César Vallejo',body:`
+<p>Su poesía evoluciona desde una visión íntima y existencial hacia una experimentación lingüística innovadora y, finalmente, hacia la preocupación colectiva. Vallejo convierte el sufrimiento humano en el eje central de su creación. Considerado uno de los poetas más importantes del siglo XX, renovó profundamente la poesía en lengua española.</p>
+<h4>Características</h4>
+<ul>
+  <li><strong>Profunda preocupación por el sufrimiento humano:</strong> el dolor, la muerte, la injusticia y la condición trágica de la existencia.</li>
+  <li><strong>Lenguaje innovador y original</strong> (especialmente en <em>Trilce</em>): neologismos, alteraciones de la sintaxis, ruptura de normas lingüísticas.</li>
+  <li>Evolución estilística constante: del modernismo a la vanguardia y finalmente a la poesía social.</li>
+  <li>Intensidad emocional: angustia, soledad, compasión y solidaridad con gran fuerza expresiva.</li>
+  <li>Compromiso social y político en su última etapa.</li>
+  <li>Universalidad temática y búsqueda de fraternidad humana.</li>
+</ul>
+<h4>Etapas</h4>
+<div class="etapas">
+  <div class="etapa">
+    <div class="etapa-n">Etapa 1 — Modernista e intimista</div>
+    <div class="etapa-titulo">Los heraldos negros (1918)</div>
+    <p>Clara influencia del modernismo de Rubén Darío y del posmodernismo. Lenguaje todavía clásico, con métrica y rima reconocibles. Temas: el dolor humano, la muerte, la culpa, el sufrimiento existencial, la figura materna y la injusticia del destino. Tono pesimista, angustiado y profundamente humano.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 2 — Vanguardista y experimental</div>
+    <div class="etapa-titulo">Trilce (1922)</div>
+    <p>Ruptura radical con la poesía tradicional. Influencia de las vanguardias (creacionismo, futurismo). Lenguaje hermético con neologismos, sintaxis fragmentada y fuerte renovación expresiva. Destruye las estructuras métricas y la puntuación clásica. Temas: el tiempo, la soledad, la infancia y el dolor llevado al extremo expresivo. Considerada una de las obras más innovadoras de la poesía en lengua española.</p>
+  </div>
+  <div class="etapa">
+    <div class="etapa-n">Etapa 3 — Social, solidaria y comprometida</div>
+    <div class="etapa-titulo">Poemas humanos / España, aparta de mí este cáliz (póstumos, 1939)</div>
+    <p>Lenguaje más claro y directo, aunque con gran intensidad expresiva. Fuerte compromiso político y social, influido por el marxismo y el impacto de la Guerra Civil Española. Temas: la defensa del hombre oprimido, el sufrimiento colectivo, la solidaridad, la fraternidad y la esperanza en un mundo más justo. El yo poético se transforma en un «nosotros» que representa a toda la humanidad.</p>
+  </div>
+</div>`},
+
+  // ══════════════════════════════════════════════════
+  // 4. TEATRO
+  // ══════════════════════════════════════════════════
+  {id:'t-40',sec:'teatro',badge:'Años 40',badgeClass:'b40',title:'4.1 El teatro de los años 40: Comedia burguesa y teatro de humor',open:true,body:`
+<p>En los años 40, muchos dramaturgos importantes habían fallecido o marchado al exilio. La censura del régimen ponía límites a toda creación literaria.</p>
+<div class="tc">
+  <div class="tc-box">
+    <h5>La Comedia Burguesa</h5>
+    <p>Teatro tradicional, arraigado y comercial dirigido a un público de clase media-alta. Objetivo: entretener y transmitir la ideología del régimen (familia, matrimonio, el hogar). Conflictos individuales y cotidianos; deja de lado lo existencial o social. Crítica suave de algunas costumbres burguesas. Obras bien construidas con diálogos elaborados.</p>
+  </div>
+  <div class="tc-box">
+    <h5>La Renovación del Teatro de Humor</h5>
+    <p>Teatro menos convencional con propuestas innovadoras. Se refugia en la ilusión y el humor para aliviar las limitaciones de la vida (debido a la censura). Genera situaciones cercanas al teatro absurdo; se aleja del realismo y da cabida a lo inverosímil y lo insólito. Esta absurdidad podría interpretarse como crítica al régimen.</p>
+  </div>
+</div>`},
+
+  {id:'t-somb',sec:'teatro',badge:'Obra',badgeClass:'bObra',title:'4.1.1 Miguel Mihura — Tres sombreros de copa (1952)',body:`
+<p>Escrita en 1932, aunque estrenada veinte años más tarde. Una de las obras fundamentales del teatro español del siglo XX y un claro antecedente del teatro del absurdo. Desarrollada íntegramente en una habitación de hotel durante una sola noche: la última noche de soltero de Dionisio. Estructura circular: comienza y termina con la entrada y salida de Dionisio y don Rosario, subrayando la imposibilidad de cambio.</p>
+<h4>Temas</h4>
+<ul>
+  <li><strong>La felicidad imposible:</strong> Dionisio tiene la oportunidad de elegir una vida distinta con Paula pero finalmente renuncia.</li>
+  <li><strong>Enfrentamiento entre dos concepciones de la vida:</strong> seguridad/orden/convenciones sociales frente a libertad/improvisación/mundo del espectáculo.</li>
+</ul>
+<h4>Espacio y Tiempo</h4>
+<p>Espacio único y cerrado: una <strong>habitación de hotel</strong> en una capital de provincia europea de segundo orden. Tiempo dramático: <strong>una sola noche</strong>; desarrollo temporal lineal y cronológico.</p>
+<h4>Estilo</h4>
+<ul>
+  <li>Diálogos ágiles y rápidos; pocas intervenciones largas.</li>
+  <li>Monólogos únicamente de Dionisio (antes de la entrada de Paula y en presencia de Buby).</li>
+  <li>Un aparte cuando Dionisio cree que su futuro suegro ha muerto.</li>
+  <li>Acotaciones: las que encabezan los actos (espacio escénico) y las que aparecen entre paréntesis (gestos, actitudes, tonos).</li>
+  <li>Lenguaje coloquial, a veces más literario o infantil.</li>
+  <li><strong>Humorismo:</strong> a través del lenguaje (sorpresa, literalidad, exageración, razonamientos absurdos), de las situaciones (inesperadas y paródicas) y de los personajes (apariencia, gestos, comportamiento).</li>
+</ul>`},
+
+  {id:'t-men',sec:'teatro',badge:'Obra',badgeClass:'bObra',title:'4.1.2 Antonio Buero Vallejo — Las Meninas (1960)',body:`
+<p>Obra de teatro histórico de Buero Vallejo ambientada en la corte de Felipe IV, siglo XVII. A través de la figura de Velázquez reflexiona sobre el arte y el artista en una sociedad dominada por el poder. Aunque la acción se sitúa en el pasado, tiene una clara intención alegórica: el siglo XVII como marco para criticar indirectamente la España franquista. Estructura cerrada y progresiva organizada en tres actos.</p>
+<h4>Temas</h4>
+<ul>
+  <li>El conflicto entre <strong>el arte y el poder</strong>: Velázquez encarna al artista íntegro que defiende la verdad frente a la nobleza y la Inquisición.</li>
+  <li>La libertad creadora; la dignidad individual frente a la injusticia.</li>
+  <li>La envidia social; la represión ideológica.</li>
+  <li>El uso del pasado histórico para denunciar la censura franquista.</li>
+</ul>
+<h4>Espacio y Tiempo</h4>
+<p><strong>Alcázar de Madrid</strong> (espacio cerrado y opresivo, símbolo del poder) y <strong>taller de Velázquez</strong> (espacio simbólico de libertad y creación artística). Tiempo histórico: siglo XVII, reinado de Felipe IV. Tiempo dramático: lineal y continuo, condensado en pocos momentos clave.</p>
+<h4>Estilo</h4>
+<p>Sobrio y reflexivo. Diálogos densos cargados de contenido ideológico y moral. Acotaciones relevantes que crean atmósfera de opresión. Lenguaje cuidado y preciso, accesible al espectador contemporáneo. El pasado como medio para interpelar al presente.</p>`},
+
+  {id:'t-50soc',sec:'teatro',badge:'Años 50-60',badgeClass:'b50',title:'4.2 Teatro existencial y social (años 50-60)',open:true,body:`
+<h4>El Teatro Existencial</h4>
+<p>Representa conflictos propios de la condición humana: soledad, incomunicación, falta de sentido vital, frustraciones personales, angustia por el paso del tiempo. Ya se aprecian dosis de crítica social.</p>
+<h4>El Teatro del Realismo Social</h4>
+<p>Desde mediados de los 50 hasta finales de los 60, teatro inconformista y comprometido:</p>
+<ul>
+  <li>Aborda los problemas de la sociedad española: injusticias, explotación obrera, falta de libertad, represión policial.</li>
+  <li>Algunas obras sitúan la crítica en periodos históricos pasados (paralelismos con el presente, evitando la censura).</li>
+  <li>Técnica realista y lenguaje coloquial y directo; en algún autor, rasgos expresionistas cercanos al «esperpento».</li>
+  <li>Personajes humildes, habitualmente víctimas de la guerra o del franquismo.</li>
+  <li>Escenografía con espacios populares y reconocibles; rechazo del experimentalismo.</li>
+</ul>`},
+
+  {id:'t-50aut',sec:'teatro',badge:'Autores',badgeClass:'bTeatro',title:'4.2.1 Autores: Buero Vallejo y Sastre',body:`
+<h4>Antonio Buero Vallejo (1916–2000)</h4>
+<p>Figura central del teatro español de posguerra. Condenado a muerte tras la Guerra Civil (pena conmutada). Combina reflexión existencial con denuncia social.</p>
+<ul>
+  <li><em>Historia de una escalera</em> (1949): una escalera de vecinos como testigo del paso del tiempo y de las limitaciones de la existencia.</li>
+  <li><em>El tragaluz</em> (1967): dos investigadores del futuro observan una familia destruida por la guerra, reflexionando sobre la culpa colectiva.</li>
+  <li>Dramas históricos: <em>Un soñador para un pueblo</em> (1958, Esquilache); <em>Las Meninas</em> (1960, Velázquez); <em>El sueño de la razón</em> (1970, Goya). Usa el pasado para criticar el franquismo.</li>
+</ul>
+<h4>Alfonso Sastre (1926–2021)</h4>
+<p>Vertiente más radical y combativa. A diferencia de Buero (estrategia «posibilista»), Sastre defendió un teatro de ruptura sin concesiones, lo que le acarreó frecuentes prohibiciones.</p>
+<ul>
+  <li><em>La mordaza</em> (1954): tiranía de un padre sobre su familia como metáfora de la opresión política.</li>
+  <li><em>La sangre y la ceniza</em> (1961-65): martirio de Miguel Servet; alegoría sobre la intolerancia.</li>
+  <li><em>La taberna fantástica</em> (1966, estrenada 1985): ambientes marginales del Madrid popular con elementos expresionistas cercanos al esperpento.</li>
+</ul>`},
+
+  {id:'t-70exp',sec:'teatro',badge:'Años 70',badgeClass:'b70',title:'4.3 Teatro experimental de los años 70',open:true,body:`
+<p>A finales de los 60 y durante los 70, el teatro cuestiona la estética realista, recogiendo las propuestas del teatro de vanguardia europeo (Brecht, Artaud, Beckett). Los temas son similares, pero el lenguaje teatral es radicalmente nuevo.</p>
+<h4>Características</h4>
+<ul>
+  <li>El teatro concebido como <strong>espectáculo total</strong> con participación activa del público.</li>
+  <li>El texto pierde importancia frente a los recursos sonoros, visuales y corporales (comedia musical, revista, circo).</li>
+  <li>El realismo psicológico deja paso a lo surreal, lo esperpéntico (enlazando con Valle-Inclán) y a diálogos y situaciones absurdas.</li>
+  <li>Animalización o degradación de los personajes; acción no lineal.</li>
+  <li>Preferencia por la farsa grotesca y la sátira para criticar la historia y la idiosincrasia española.</li>
+</ul>
+<h4>Temas</h4>
+<ul>
+  <li>Injusticias sociales y falta de libertad; denuncia del franquismo.</li>
+  <li>Incomunicación y soledad del individuo; lo absurdo de la guerra y la violencia como mecanismos de poder.</li>
+</ul>`},
+
+  {id:'t-70aut',sec:'teatro',badge:'Autores',badgeClass:'bTeatro',title:'4.3.1 Autores: Arrabal, Nieva, Teatro independiente, Gala',body:`
+<h4>Fernando Arrabal (1932)</h4>
+<p>Teatro cercano al absurdo, influido por su exilio en Francia desde 1955. Sus obras se centran en la incomunicación, la soledad, lo absurdo de la guerra y el derrumbe de las estructuras sociales. Visión pesimista de la condición humana. Obras: <em>Picnic</em> (1952), <em>El triciclo</em> (1953), <em>El arquitecto y el emperador de Asiria</em> (1966).</p>
+<h4>Francisco Nieva (1924–2016)</h4>
+<p>Formado como escenógrafo. Muy influido por el carnaval, el esperpento y el surrealismo. Crea el «teatro furioso»: libertad imaginativa, ironía, puesta en escena barroca y espectacular, mezcla de expresiones populares con lenguaje culto y recargado. Obras: <em>La carroza de plomo candente</em> (1976), <em>Pelo de Tormenta</em> (1997).</p>
+<h4>El Teatro Independiente</h4>
+<p>Grupos como Tábano, Els Joglars, Els Comediants, La Cubana, <strong>La Fura dels Baus</strong> proponen el teatro como espectáculo total. Influidos por el teatro del absurdo y el teatro de la crueldad de Artaud. La Fura dels Baus crea espacios envolventes de sonido e industriales donde los actores realizan, entre el público, rituales que sugieren el poder y la violencia.</p>
+<h4>Antonio Gala (1930–2023)</h4>
+<p>A partir de los 70, el dramaturgo de mayor éxito de la escena española. Teatro que mezcla realismo y lirismo («teatro poético»), con lenguaje cuidado y brillante. Temas: el amor, la libertad, la crítica a la hipocresía y la intransigencia. Obras: <em>Los buenos días perdidos</em> (1972), <em>Anillos para una dama</em> (1973), <em>¿Por qué corres, Ulises?</em> (1974).</p>`},
+
+  {id:'t-80',sec:'teatro',badge:'Años 80',badgeClass:'b80',title:'4.4 El teatro de los años 80: Los nuevos realismos',open:true,body:`
+<p>Con la llegada del PSOE al poder en 1982, España vive profundos cambios. Conviven la modernización con graves problemas: desempleo, drogadicción, delincuencia y terrorismo. Muchos dramaturgos dan la espalda al experimentalismo radical y recuperan la tradición realista para conectar con el público.</p>
+<h4>Características</h4>
+<ul>
+  <li>Revalorización del <strong>realismo social y el sainete costumbrista</strong>.</li>
+  <li>Temas de la España de la época: paro, drogas, delincuencia y terrorismo.</li>
+  <li>Lugares, anécdotas y situaciones próximas y reconocibles por el público.</li>
+  <li>Interés por personajes marginales o fracasados (drogadicción, delincuencia, inadaptación).</li>
+  <li>La <strong>ironía y la ternura</strong> juegan un papel clave: no juzgan a sus personajes sino que los miran con humor, compasión y distancia crítica.</li>
+  <li>Compromiso con la sociedad de su tiempo; voluntad de denuncia.</li>
+</ul>`},
+
+  {id:'t-80aut',sec:'teatro',badge:'Autores',badgeClass:'bTeatro',title:'4.4.1 Autores: Alonso de Santos, Sanchís Sinisterra, Fernán Gómez',body:`
+<h4>José Luis Alonso de Santos (1942)</h4>
+<p>Figura más representativa del «neorrealismo» o «neocostumbrismo». Personajes, situaciones y ambientes populares retratados con mirada a la vez dura y tierna. <em>La estanquera de Vallecas</em> (1981): atracadores y atracados terminan jugando a las cartas. <em>Bajarse al moro</em> (1985): una de las obras clave del teatro español de finales del XX, retratando la juventud urbana y la marginalidad.</p>
+<h4>José Sanchís Sinisterra (1940)</h4>
+<p>Autor, director, pedagogo y traductor. Nivel literario muy alto y constante experimentación. El humor se combina con el dramatismo y una mirada tierna e irónica. Obra cumbre: <em>¡Ay, Carmela!</em> (1987): emotivo diálogo entre vivos y muertos ambientado en la Guerra Civil. Dos cómicos de variedades —Carmela y Paulino— obligados a actuar ante soldados del ejército nacional, mientras asisten como testigos a la última función de brigadistas internacionales antes de ser fusilados. Llevada al cine por Carlos Saura en 1990.</p>
+<h4>Fernando Fernán Gómez (1921–2007)</h4>
+<p>Figura polifacética del cine y el teatro. Obra cumbre: <em>Las bicicletas son para el verano</em> (escrita en 1977, estrenada en 1982). Situada en el verano de 1936 al inicio de la Guerra Civil, se centra en la vida cotidiana de una familia cuyos personajes simbolizan distintas ideologías. A pesar de las desigualdades, todos se ayudan para seguir viviendo: visión humanista sin maniqueísmo. Versión cinematográfica de Jaime Chávarri en 1984.</p>`},
+
+  {id:'t-90',sec:'teatro',badge:'Años 90+',badgeClass:'b90',title:'4.5 El teatro desde los años 90: últimas tendencias',open:true,body:`
+<p>Nueva generación de dramaturgos que recoge el testigo de maestros como Buero Vallejo, Nieva y Sanchís Sinisterra. Sus obras y trayectorias son dispares pero comparten una voluntad común: superar el realismo costumbrista de los 80 y el experimentalismo de los 70.</p>
+<h4>Características</h4>
+<ul>
+  <li>Reflexión histórica, filosófica y social sobre el poder, la violencia y la manipulación para abordar los orígenes de los problemas actuales.</li>
+  <li>No pretenden dar respuestas sino <strong>plantear preguntas</strong> que el espectador ha de responder por sí mismo.</li>
+  <li>Temas: la sociedad actual y la historia reciente de Europa (holocausto nazi, guerra civil, guerra fría) → «teatro filosófico».</li>
+  <li>Intertextualidad: algunas obras se basan en obras anteriores de la tradición.</li>
+  <li>El texto dramático recupera gran relevancia y se enriquece con elementos del guion cinematográfico, el videoclip, la danza o la música.</li>
+  <li>Tendencia al «teatro pobre» (Jerzy Grotowski): texto, actores e imaginación del público.</li>
+</ul>`},
+
+  {id:'t-90aut',sec:'teatro',badge:'Autores',badgeClass:'bTeatro',title:'4.5.1 Autores: Mayorga y Conejero',body:`
+<h4>Juan Mayorga (1965)</h4>
+<p>Licenciado en Matemáticas y Doctor en Filosofía (tesis sobre Walter Benjamin). La figura más destacada de su generación. Defiende la capacidad de la palabra para cuestionar creencias asumidas, convencer y liberar. Da gran importancia a la argumentación del texto.</p>
+<ul>
+  <li>Obras históricas: <em>Cartas de amor a Stalin</em> (1997), <em>El cartógrafo</em> (2009), <em>La lengua en pedazos</em> (2011, basada en Santa Teresa).</li>
+  <li>Dramas sobre problemas actuales: <em>El chico de la última fila</em> (2006), <em>El mago</em> (2017).</li>
+  <li>Otros autores de su generación: Paloma Pedreño, Laura Ripoll, Sergi Belbel, Ignacio García May.</li>
+</ul>
+<h4>Alberto Conejero (1978)</h4>
+<p>Ligado a los escenarios alternativos de Madrid (Nave73, La pensión de pulgas). Su obra interpela al espectador sobre su identidad y esencia, con especial atención a los derechos LGTBI y la homosexualidad. <em>Cliff</em> (2010): inspirada en episodios de la biografía de Montgomery Clift. <em>La piedra oscura</em> (2015): recrea la relación entre Federico García Lorca y su último compañero, Rafael Rodríguez Rapún, en los días antes del fusilamiento del poeta.</p>
+<p>Otros autores de su generación: Alfredo Sanzol, Lucía Carballal, María Velasco, Pablo Messiez.</p>`},
+
+  // ══════════════════════════════════════════════════
+  // 5. ENSAYO
+  // ══════════════════════════════════════════════════
+  {id:'e-arg1',sec:'ensayo',badge:'Argumento 1',badgeClass:null,title:'Argumento 1: La sociedad condiciona la libertad',open:true,body:`
+<p><strong>Tesis:</strong> El ser humano cree elegir libremente, pero sus decisiones están profundamente condicionadas por la sociedad y las circunstancias.</p>
+<p><strong>Idea central:</strong> Aunque los personajes parecen tomar decisiones propias, en realidad el entorno social, las normas y las expectativas colectivas limitan su libertad. Vivir es elegir, sí, pero no en igualdad de condiciones.</p>
+<h4>Tres sombreros de copa — Miguel Mihura</h4>
+<p>Dionisio debe decidir entre una vida libre con Paula o el matrimonio burgués que le espera. Aunque existe una posibilidad real de elección, la presión social es más fuerte: el trabajo serio, el matrimonio respetable, la estabilidad económica. Finalmente, Dionisio renuncia a su deseo y elige lo que la sociedad espera de él. Su elección no es plenamente libre, sino resultado del miedo a salirse de la norma.</p>
+<p><em>Ejemplo clave: la boda representa el orden social que aplasta la espontaneidad y la felicidad personal.</em></p>
+<h4>La buena suerte — Rosa Montero</h4>
+<p>Pablo cree huir libremente de su pasado al bajarse del tren en un pueblo cualquiera. Sin embargo, su comportamiento está marcado por el trauma, la culpa y el miedo, es decir, por su historia personal. Aunque parece una decisión espontánea, en realidad está condicionado psicológicamente: no elige desde la libertad, sino desde la huida.</p>
+<p><em>Idea importante: la sociedad y el pasado personal pesan tanto como una ley explícita.</em></p>
+<h4>Relato de un náufrago — Gabriel García Márquez</h4>
+<p>El marinero no elige estar en la balsa: es víctima de una negligencia del sistema militar. Incluso cuando lucha por sobrevivir, sus acciones están condicionadas por el hambre, la sed y el instinto. Aquí la libertad casi desaparece: sobrevivir no es elegir, es reaccionar.</p>
+<p><em>Conclusión parcial: la libertad puede verse anulada por condiciones extremas.</em></p>`},
+
+  {id:'e-arg2',sec:'ensayo',badge:'Argumento 2',badgeClass:null,title:'Argumento 2: El ser humano conserva una libertad interior',body:`
+<p><strong>Tesis:</strong> A pesar de los condicionamientos, el ser humano conserva una libertad interior: siempre puede elegir su actitud y su respuesta.</p>
+<p><strong>Idea central:</strong> Aunque no podamos controlar las circunstancias, sí podemos decidir cómo afrontarlas. La libertad no siempre es externa, sino moral y personal.</p>
+<h4>Relato de un náufrago</h4>
+<p>El protagonista no decide el naufragio, pero elige resistir, no rendirse, mantener la esperanza. Incluso cuando delira, su voluntad de vivir se impone. Su libertad se manifiesta en su determinación, no en sus condiciones materiales.</p>
+<p><em>Ejemplo claro: podría dejarse morir, pero decide luchar cada día.</em></p>
+<h4>La buena suerte</h4>
+<p>Pablo, tras huir, elige finalmente enfrentarse a su pasado y reconstruirse. El encuentro con Raluca es decisivo: ella representa una forma distinta de vivir, más abierta y humana. Aquí la libertad aparece cuando el personaje deja de huir y asume la responsabilidad de sus actos.</p>
+<p><em>Vivir es elegir no esconderse ni escapar más.</em></p>
+<h4>Tres sombreros de copa</h4>
+<p>Aunque Dionisio acaba sometiéndose, durante la noche con Paula experimenta una libertad auténtica: ríe, juega, imagina otra vida. Ese momento demuestra que la libertad existe, aunque sea breve y frágil.</p>
+<p><em>La obra muestra que la libertad es posible, pero exige valentía.</em></p>`},
+
+  {id:'e-arg3',sec:'ensayo',badge:'Argumento 3',badgeClass:null,title:'Argumento 3: Elegir implica responsabilidad',body:`
+<p><strong>Tesis:</strong> Elegir implica responsabilidad: la verdadera libertad no es hacer lo que uno quiere, sino asumir las consecuencias.</p>
+<p><strong>Idea central:</strong> Las obras muestran que la libertad no es gratuita: cada elección tiene un precio, y muchos personajes prefieren la seguridad a la autenticidad.</p>
+<h4>La buena suerte</h4>
+<p>Pablo comprende que no basta con huir: vivir exige responsabilizarse del daño causado. Solo cuando acepta su pasado puede aspirar a una vida más plena. La libertad auténtica nace del reconocimiento del error.</p>
+<h4>Tres sombreros de copa</h4>
+<p>Dionisio no asume el riesgo de elegir a Paula: prefiere una vida segura pero vacía. Su elección lo condena a una existencia previsible, sin pasión. La obra critica una sociedad donde la comodidad sustituye a la libertad.</p>
+<h4>Relato de un náufrago</h4>
+<p>El protagonista asume cada decisión como una cuestión de vida o muerte. No hay espacio para la irresponsabilidad. Aquí, elegir significa sobrevivir o morir, lo que subraya la gravedad del acto de elegir.</p>`},
+
+  {id:'e-concl',sec:'ensayo',badge:'Conclusión',badgeClass:null,title:'Conclusión global',open:true,body:`
+<p>Las tres obras coinciden en que <strong>vivir es elegir</strong>, pero no desde una libertad absoluta. El ser humano está condicionado por la sociedad, el pasado y las circunstancias, sin embargo conserva una libertad interior que le permite decidir su actitud y asumir responsabilidades.</p>
+<p><strong>La verdadera libertad no consiste en escapar, sino en afrontar la vida con conciencia y valentía.</strong></p>
+<h4>Síntesis por obra</h4>
+<ul>
+  <li><strong>Tres sombreros de copa (Mihura):</strong> La presión social aplasta la libertad, pero en el encuentro con Paula existe un atisbo de vida auténtica.</li>
+  <li><strong>La buena suerte (Rosa Montero):</strong> La huida no es libertad. Solo la responsabilidad sobre el propio pasado permite reconstruirse.</li>
+  <li><strong>Relato de un náufrago (García Márquez):</strong> Incluso en las condiciones más extremas, la voluntad de vivir es una forma de libertad.</li>
+</ul>`},
+];
+
+// ── RENDERING ─────────────────────────────────────────
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  let html = '';
+  NAV.forEach(sec => {
+    html += `<div class="ng">
+      <div class="ng-hdr open" id="ng-${sec.id}" onclick="toggleGroup('${sec.id}')">
+        <span class="ng-dot" style="background:${sec.color}"></span>
+        <span>${sec.icon} ${sec.label}</span>
+        <span class="ng-arr">▶</span>
+      </div>
+      <div class="ns open" id="ns-${sec.id}">`;
+    sec.items.forEach(item => {
+      html += `<div class="ni${item.sub ? ' sub' : ''}" id="ni-${item.id}" onclick="scrollToCard('${item.id}')">${item.label}</div>`;
+    });
+    html += `</div></div>`;
+  });
+  sb.innerHTML = html;
+}
+
+function renderContent() {
+  const ct = document.getElementById('content');
+  const secOrder = ['analisis','narrativa','poesia','teatro','ensayo'];
+  const secMeta = {
+    analisis:  {title:'1. Análisis Textual',  icon:'📝', color:'#3b82f6'},
+    narrativa: {title:'2. Narrativa',          icon:'📖', color:'#f59e0b'},
+    poesia:    {title:'3. Poesía',             icon:'🎭', color:'#a855f7'},
+    teatro:    {title:'4. Teatro',             icon:'🎪', color:'#14b8a6'},
+    ensayo:    {title:'5. Ensayo / Argumentación', icon:'✍️', color:'#f43f5e'},
+  };
+  let html = '';
+  secOrder.forEach(secId => {
+    const meta = secMeta[secId];
+    const cards = CARDS.filter(c => c.sec === secId);
+    html += `<div id="sec-${secId}" class="sh">
+      <div class="sh-bar" style="background:${meta.color}"></div>
+      <span class="sh-icon">${meta.icon}</span>
+      <h2>${meta.title}</h2>
+    </div>`;
+    cards.forEach(card => {
+      const badgeHtml = card.badge ? `<span class="badge ${card.badgeClass||''}">${card.badge}</span>` : '';
+      html += `<div class="card${card.open?' open':''}" id="card-${card.id}">
+        <div class="ch" onclick="toggleCard('${card.id}')">
+          <div class="ch-title">${card.title}</div>
+          ${badgeHtml}
+          <span class="ch-arr">▼</span>
+        </div>
+        <div class="cb">${card.body}</div>
+      </div>`;
+    });
+  });
+  html += '<div id="nr"><p>No se encontraron resultados.</p><small>Intenta con otro término.</small></div>';
+  ct.innerHTML = html;
+}
+
+// ── INTERACTIONS ──────────────────────────────────────
+function toggleGroup(id) {
+  const hdr = document.getElementById('ng-'+id);
+  const sub = document.getElementById('ns-'+id);
+  hdr.classList.toggle('open');
+  sub.classList.toggle('open');
+}
+
+function toggleCard(id) {
+  document.getElementById('card-'+id).classList.toggle('open');
+}
+
+function scrollToCard(id) {
+  const el = document.getElementById('card-'+id);
+  if (!el) return;
+  el.classList.add('open');
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+  // close sidebar on mobile
+  if (window.innerWidth < 720) document.getElementById('sidebar').classList.remove('open');
+  // highlight nav item
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  const ni = document.getElementById('ni-'+id);
+  if (ni) ni.classList.add('active');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ── SEARCH ────────────────────────────────────────────
+let searchTimer;
+function doSearch(val) {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => _search(val.trim()), 180);
+}
+
+function _search(q) {
+  const sc = document.getElementById('sc');
+  const fc = document.getElementById('fc');
+  const nr = document.getElementById('nr');
+  sc.style.display = q ? 'block' : 'none';
+
+  // Restore all cards if empty
+  if (!q) {
+    document.querySelectorAll('.card').forEach(c => {
+      c.classList.remove('hidden');
+      // restore original body (remove marks)
+      const cb = c.querySelector('.cb');
+      cb.innerHTML = cb.innerHTML.replace(/<mark>|<\/mark>/g,'');
+    });
+    document.querySelectorAll('.sh, .sub-hdr').forEach(e => e.classList.remove('hidden'));
+    fc.textContent = '';
+    nr.style.display = 'none';
+    return;
+  }
+
+  const ql = q.toLowerCase();
+  let found = 0;
+
+  document.querySelectorAll('.card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(ql)) {
+      card.classList.remove('hidden');
+      card.classList.add('open');
+      // highlight
+      const cb = card.querySelector('.cb');
+      const clean = cb.innerHTML.replace(/<mark>|<\/mark>/g,'');
+      cb.innerHTML = clean.replace(new RegExp('('+escRe(q)+')', 'gi'), '<mark>$1</mark>');
+      found++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Show section headers only if they have visible cards
+  document.querySelectorAll('.sh').forEach(sh => {
+    const secId = sh.id.replace('sec-','');
+    const hasVisible = [...document.querySelectorAll('.card')].some(c => c.id.includes(secId.slice(0,4)) && !c.classList.contains('hidden') && CARDS.find(cd=>('card-'+cd.id)===c.id&&cd.sec===secId));
+    sh.classList.toggle('hidden', !hasVisible);
+  });
+
+  fc.textContent = found ? `${found} resultado${found>1?'s':''}` : '';
+  nr.style.display = found ? 'none' : 'block';
+}
+
+function clearSearch() {
+  document.getElementById('search').value = '';
+  _search('');
+}
+
+function escRe(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+}
+
+// ── SCROLL TRACKING ───────────────────────────────────
+function onScroll() {
+  const ct = document.getElementById('content');
+  const btt = document.getElementById('btt');
+  btt.style.display = ct.scrollTop > 300 ? 'flex' : 'none';
+
+  // Active nav item
+  const cards = document.querySelectorAll('.card:not(.hidden)');
+  let activeId = null;
+  cards.forEach(c => {
+    const rect = c.getBoundingClientRect();
+    if (rect.top < 120) activeId = c.id.replace('card-','');
+  });
+  if (activeId) {
+    document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+    const ni = document.getElementById('ni-'+activeId);
+    if (ni) {
+      ni.classList.add('active');
+      ni.scrollIntoView({block:'nearest'});
+    }
+  }
+}
+
+function goTop() {
+  document.getElementById('content').scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── THEME TOGGLE ──────────────────────────────────────
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDay = html.classList.toggle('day');
+  const icon = document.getElementById('theme-icon');
+  const label = document.getElementById('theme-label');
+  if (isDay) {
+    icon.textContent = '🌙';
+    label.textContent = 'Noche';
+  } else {
+    icon.textContent = '☀️';
+    label.textContent = 'Día';
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────
+renderSidebar();
+renderContent();
+document.getElementById('content').addEventListener('scroll', onScroll);
+</script>
+</body>
+</html>
